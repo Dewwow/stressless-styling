@@ -27,7 +27,7 @@ tasks:
 flows:
     dev_org:
         steps:
-            2:
+            1.5:
                 task: create_community
                 options:
                     name: stressless
