@@ -1,12 +1,19 @@
 {
   "orgName": "stressless-styling - Dev Org",
   "edition": "Developer",
+  "features": [
+      "Communities"
+    ],
   "settings": {
     "lightningExperienceSettings": {
       "enableS1DesktopEnabled": true
     },
     "chatterSettings": {
       "enableChatter": true
+    },
+    "communitiesSettings": {
+      "enableNetworksEnabled": true,
+      "enableOotbProfExtUserOpsEnable": true
     },
     "userManagementSettings": {
       "enableNewProfileUI": true
@@ -19,6 +26,9 @@
     },
     "languageSettings": {
       "enableTranslationWorkbench": true
+    },
+    "experienceBundleSettings": {
+      "enableExperienceBundleMetadata": true
     }
   }
 }
