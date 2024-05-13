@@ -1,0 +1,26 @@
+minimum_cumulusci_version: '3.86.1'
+project:
+    name: stressless-styling
+    package:
+        name: stressless-styling
+        namespace: dewwow
+        api_version: '60.0'
+    git:
+        default_branch: 'main'
+    source_format: sfdx
+
+tasks:
+    robot:
+        options:
+            suites: robot/stressless-styling/tests
+            options:
+                outputdir: robot/stressless-styling/results
+
+    robot_testdoc:
+        options:
+            path: robot/stressless-styling/tests
+            output: robot/stressless-styling/doc/stressless-styling_tests.html
+
+    run_tests:
+        options:
+            required_org_code_coverage_percent: 75
