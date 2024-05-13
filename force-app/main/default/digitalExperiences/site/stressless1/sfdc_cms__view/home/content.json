@@ -1,0 +1,63 @@
+{
+  "type" : "sfdc_cms__view",
+  "title" : "Home",
+  "contentBody" : {
+    "component" : {
+      "children" : [ {
+        "children" : [ {
+          "attributes" : {
+            "backgroundImageConfig" : "",
+            "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "componentSpacerSize" : "",
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"a75d3cd5-8295-43f0-8b45-d3c83f99e167\",\"columns\":[{\"UUID\":\"2514881f-27bf-440a-9c26-f2bff914b12c\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":null}]}"
+          },
+          "children" : [ {
+            "children" : [ {
+              "attributes" : {
+                "richTextValue" : "To be replaced with real content."
+              },
+              "definition" : "community_builder:htmlEditor",
+              "id" : "d9551a98-8730-48f6-871c-48f8f43d6965",
+              "type" : "component"
+            } ],
+            "id" : "2514881f-27bf-440a-9c26-f2bff914b12c",
+            "name" : "col1",
+            "title" : "Column 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "a75d3cd5-8295-43f0-8b45-d3c83f99e167",
+          "type" : "component"
+        } ],
+        "id" : "9d90c2c6-45bd-4412-82e0-141d0be73ad8",
+        "name" : "content",
+        "title" : "Content",
+        "type" : "region"
+      }, {
+        "children" : [ {
+          "attributes" : {
+            "customHeadTags" : "",
+            "description" : "",
+            "pageTitle" : "Home",
+            "recordId" : "{!recordId}"
+          },
+          "definition" : "community_builder:seoAssistant",
+          "id" : "09c21669-adfd-4fa2-9f4d-95a1f5c57877",
+          "type" : "component"
+        } ],
+        "id" : "c4649649-6d6b-4ba1-addb-70c98dc1b654",
+        "name" : "sfdcHiddenRegion",
+        "title" : "sfdcHiddenRegion",
+        "type" : "region"
+      } ],
+      "definition" : "community_layout:sldsFlexibleLayout",
+      "id" : "1e92b923-0350-47b8-9a3b-ff135b1bc3fc",
+      "type" : "component"
+    },
+    "dataProviders" : [ ],
+    "themeLayoutType" : "Inner",
+    "viewType" : "home"
+  }
+}
