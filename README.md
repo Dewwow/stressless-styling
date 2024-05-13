@@ -1,7 +1,13 @@
 # stressless-styling
 
-Add a brief description of this project here, in Markdown format.
-It will be shown on the main page of the project's GitHub repository.
+## Goal
+
+Create a managed package that any salon can install into their Saleforce org to help them run their business. 
+
+## UI Design
+
+https://www.figma.com/design/MXWlho5ETlbfuwZeBngqRy/stressless-styling?node-id=0%3A1&t=6jfi6HwifJ9ixpxU-1
+
 
 ## Development
 
