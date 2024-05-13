@@ -24,3 +24,11 @@ tasks:
     run_tests:
         options:
             required_org_code_coverage_percent: 75
+flows:
+    dev_org:
+        steps:
+            99:
+                task: create_community
+                options:
+                    name: stressless
+                    template: Build Your Own (LWR)
