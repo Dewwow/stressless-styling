@@ -15,11 +15,9 @@
           },
           "children" : [ {
             "children" : [ {
-              "attributes" : {
-                "richTextValue" : "To be replaced with real content."
-              },
-              "definition" : "community_builder:htmlEditor",
-              "id" : "d9551a98-8730-48f6-871c-48f8f43d6965",
+              "attributes" : { },
+              "definition" : "c:dashboard",
+              "id" : "5fd9fd97-9500-4b43-b173-7a19e19b0f76",
               "type" : "component"
             } ],
             "id" : "2514881f-27bf-440a-9c26-f2bff914b12c",
