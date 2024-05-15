@@ -24,9 +24,15 @@ tasks:
     run_tests:
         options:
             required_org_code_coverage_percent: 75
+
+    update_debug_mode:
+        class_path: tasks.update_debug_mode.UpdateUserDebugMode
+
 flows:
     dev_org:
         steps:
+            1.4: 
+                task: update_debug_mode
             1.5:
                 task: create_community
                 options:
