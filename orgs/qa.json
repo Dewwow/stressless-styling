@@ -1,6 +1,6 @@
 {
-  "orgName": "stressless-styling - Release Test Org",
-  "edition": "Enterprise",
+  "orgName": "stressless-styling - QA Org",
+  "edition": "Developer",
   "features": [
     "Communities"
   ],

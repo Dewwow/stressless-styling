@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cci org list:*)",
+      "Bash(cci org scratch_delete:*)",
+      "Bash(cci org remove:*)",
+      "Bash(cci flow run:*)",
+      "Bash(cci version:*)",
+      "Bash(sf:*)",
+      "Bash(pipx upgrade:*)",
+      "Bash(cci service list:*)",
+      "Bash(cci service connect:*)",
+      "Bash(printf:*)",
+      "Bash(cci task run:*)",
+      "Bash(cci org browser dev:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
