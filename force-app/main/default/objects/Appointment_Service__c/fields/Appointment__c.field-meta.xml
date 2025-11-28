@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Appointment__c</fullName>
+    <label>Appointment</label>
+    <type>MasterDetail</type>
+    <referenceTo>Appointment__c</referenceTo>
+    <relationshipLabel>Services</relationshipLabel>
+    <relationshipName>Appointment_Services</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    <description>The appointment this service is part of</description>
+</CustomField>

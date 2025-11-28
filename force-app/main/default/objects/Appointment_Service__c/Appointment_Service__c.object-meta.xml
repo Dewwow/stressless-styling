@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Appointment Service</label>
+    <pluralLabel>Appointment Services</pluralLabel>
+    <nameField>
+        <label>Appointment Service Number</label>
+        <displayFormat>AS-{0000}</displayFormat>
+        <type>AutoNumber</type>
+    </nameField>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <sharingModel>ControlledByParent</sharingModel>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableActivities>false</enableActivities>
+    <description>Services included in an appointment with pricing captured at booking time</description>
+    <searchLayouts>
+        <searchResultsAdditionalFields>Appointment__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Service__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Price__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Duration_Minutes__c</searchResultsAdditionalFields>
+    </searchLayouts>
+</CustomObject>

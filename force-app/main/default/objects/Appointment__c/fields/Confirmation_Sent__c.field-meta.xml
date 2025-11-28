@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Confirmation_Sent__c</fullName>
+    <label>Confirmation Sent</label>
+    <type>Checkbox</type>
+    <defaultValue>false</defaultValue>
+    <description>Whether confirmation email/SMS was sent</description>
+    <inlineHelpText>Check when confirmation has been sent to customer</inlineHelpText>
+</CustomField>

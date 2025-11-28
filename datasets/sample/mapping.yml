@@ -1,0 +1,116 @@
+# Stressless Styling Sample Data Mapping
+# Load order matters - parent objects before children
+
+Service_Category__c:
+  sf_object: Service_Category__c
+  table: Service_Category__c
+  fields:
+    - Name
+    - Description__c
+    - Sort_Order__c
+    - Active__c
+
+Service__c:
+  sf_object: Service__c
+  table: Service__c
+  fields:
+    - Name
+    - Description__c
+    - Price__c
+    - Duration_Minutes__c
+    - Sort_Order__c
+    - Active__c
+  lookups:
+    Service_Category__c:
+      table: Service_Category__c
+
+Contact:
+  sf_object: Contact
+  table: Contact
+  fields:
+    - FirstName
+    - LastName
+    - Email
+    - Phone
+
+Stylist__c:
+  sf_object: Stylist__c
+  table: Stylist__c
+  fields:
+    - Name
+    - Bio__c
+    - Title__c
+    - Hire_Date__c
+    - Commission_Rate__c
+    - Active__c
+  lookups:
+    Contact__c:
+      table: Contact
+
+Stylist_Service__c:
+  sf_object: Stylist_Service__c
+  table: Stylist_Service__c
+  fields:
+    - Price_Override__c
+    - Duration_Override__c
+  lookups:
+    Stylist__c:
+      table: Stylist__c
+    Service__c:
+      table: Service__c
+
+Stylist_Availability__c:
+  sf_object: Stylist_Availability__c
+  table: Stylist_Availability__c
+  fields:
+    - Day_of_Week__c
+    - Start_Time__c
+    - End_Time__c
+    - Active__c
+  lookups:
+    Stylist__c:
+      table: Stylist__c
+
+Preferences__c:
+  sf_object: Preferences__c
+  table: Preferences__c
+  fields:
+    - Hair_Type__c
+    - Hair_Texture__c
+    - Scalp_Sensitivity__c
+    - Chemical_Treated__c
+    - Communication_Preference__c
+    - Allergies_Notes__c
+  lookups:
+    Contact__c:
+      table: Contact
+    Preferred_Stylist__c:
+      table: Stylist__c
+
+Appointment__c:
+  sf_object: Appointment__c
+  table: Appointment__c
+  fields:
+    - Appointment_Date__c
+    - Start_Time__c
+    - Status__c
+    - Notes__c
+    - Booked_Online__c
+  lookups:
+    Customer__c:
+      table: Contact
+    Stylist__c:
+      table: Stylist__c
+
+Appointment_Service__c:
+  sf_object: Appointment_Service__c
+  table: Appointment_Service__c
+  fields:
+    - Price__c
+    - Duration_Minutes__c
+    - Notes__c
+  lookups:
+    Appointment__c:
+      table: Appointment__c
+    Service__c:
+      table: Service__c

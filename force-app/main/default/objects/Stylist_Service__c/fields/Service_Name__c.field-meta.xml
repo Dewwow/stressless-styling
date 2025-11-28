@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Service_Name__c</fullName>
+    <label>Service Name</label>
+    <type>Text</type>
+    <externalId>false</externalId>
+    <formula>Service__r.Name</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <description>Displays the service name for use in related lists and reports</description>
+    <inlineHelpText>The name of the service (formula: Service__r.Name)</inlineHelpText>
+</CustomField>

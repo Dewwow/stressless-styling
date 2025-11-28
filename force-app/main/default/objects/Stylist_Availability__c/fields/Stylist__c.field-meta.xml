@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Stylist__c</fullName>
+    <label>Stylist</label>
+    <type>MasterDetail</type>
+    <referenceTo>Stylist__c</referenceTo>
+    <relationshipLabel>Availability Schedule</relationshipLabel>
+    <relationshipName>Availability</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    <description>The stylist this availability applies to</description>
+</CustomField>

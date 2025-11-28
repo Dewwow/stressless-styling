@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Scalp_Sensitivity__c</fullName>
+    <label>Scalp Sensitivity</label>
+    <type>Picklist</type>
+    <description>Customer's scalp sensitivity level</description>
+    <inlineHelpText>Important for product selection</inlineHelpText>
+    <valueSet>
+        <restricted>false</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Normal</fullName>
+                <default>true</default>
+                <label>Normal</label>
+            </value>
+            <value>
+                <fullName>Sensitive</fullName>
+                <default>false</default>
+                <label>Sensitive</label>
+            </value>
+            <value>
+                <fullName>Very Sensitive</fullName>
+                <default>false</default>
+                <label>Very Sensitive</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

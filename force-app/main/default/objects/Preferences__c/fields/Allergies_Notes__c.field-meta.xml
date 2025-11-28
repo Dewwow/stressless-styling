@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Allergies_Notes__c</fullName>
+    <label>Allergies/Notes</label>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+    <length>2000</length>
+    <description>Any allergies or special notes about customer's hair/scalp</description>
+    <inlineHelpText>Note any allergies or special considerations</inlineHelpText>
+</CustomField>

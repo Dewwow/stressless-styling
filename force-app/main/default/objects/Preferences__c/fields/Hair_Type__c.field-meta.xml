@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Hair_Type__c</fullName>
+    <label>Hair Type</label>
+    <type>Picklist</type>
+    <description>Customer's hair type</description>
+    <inlineHelpText>What type of hair does the customer have?</inlineHelpText>
+    <valueSet>
+        <restricted>false</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Straight</fullName>
+                <default>false</default>
+                <label>Straight</label>
+            </value>
+            <value>
+                <fullName>Wavy</fullName>
+                <default>false</default>
+                <label>Wavy</label>
+            </value>
+            <value>
+                <fullName>Curly</fullName>
+                <default>false</default>
+                <label>Curly</label>
+            </value>
+            <value>
+                <fullName>Coily</fullName>
+                <default>false</default>
+                <label>Coily</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

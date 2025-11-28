@@ -1,0 +1,19 @@
+Id,Name,Description__c,Price__c,Duration_Minutes__c,Sort_Order__c,Active__c,Service_Category__c
+svc-haircut,Haircut,Precision haircut with consultation and style,45.00,45,10,true,cat-hair
+svc-haircut-kids,Kids Haircut,Haircut for children under 12,25.00,30,15,true,cat-hair
+svc-blowout,Blowout,Shampoo and professional blowdry styling,35.00,30,20,true,cat-hair
+svc-color-single,Single Process Color,Full head single color application,85.00,90,30,true,cat-hair
+svc-color-highlights,Highlights,Partial or full foil highlights,120.00,120,35,true,cat-hair
+svc-color-balayage,Balayage,Hand-painted highlights for natural look,150.00,150,40,true,cat-hair
+svc-deep-condition,Deep Conditioning,Intensive moisture treatment,25.00,20,50,true,cat-hair
+svc-manicure,Classic Manicure,Nail shaping and polish with hand massage,30.00,30,10,true,cat-nails
+svc-pedicure,Classic Pedicure,Nail care and polish with foot massage,45.00,45,20,true,cat-nails
+svc-gel-mani,Gel Manicure,Long-lasting gel polish manicure,45.00,45,30,true,cat-nails
+svc-gel-pedi,Gel Pedicure,Long-lasting gel polish pedicure,60.00,60,40,true,cat-nails
+svc-nail-art,Nail Art,Custom nail designs per nail,5.00,10,50,true,cat-nails
+svc-makeup-day,Day Makeup,Natural everyday makeup application,55.00,45,10,true,cat-makeup
+svc-makeup-event,Event Makeup,Special occasion makeup with lashes,85.00,60,20,true,cat-makeup
+svc-makeup-bridal,Bridal Makeup,Wedding day makeup with trial included,200.00,90,30,true,cat-makeup
+svc-facial-basic,Express Facial,Quick cleanse and hydration treatment,50.00,30,10,true,cat-spa
+svc-facial-deluxe,Deluxe Facial,Full facial with extractions and mask,95.00,60,20,true,cat-spa
+svc-scalp-treatment,Scalp Treatment,Therapeutic scalp massage and treatment,40.00,30,30,true,cat-spa

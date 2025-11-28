@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Hire_Date__c</fullName>
+    <label>Hire Date</label>
+    <type>Date</type>
+    <description>Date this stylist started working at the salon</description>
+    <inlineHelpText>When did this stylist join the salon?</inlineHelpText>
+</CustomField>

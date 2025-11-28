@@ -1,0 +1,61 @@
+.auth-container {
+    padding: 0.5rem;
+}
+
+.sign-in-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signout-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: transparent;
+    border: none;
+    color: #706e6b;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.signout-link:hover {
+    background-color: #f3f3f3;
+    color: #014486;
+}
+
+.signout-icon {
+    --sds-c-icon-color-foreground-default: currentColor;
+}
+
+.google-signin-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 24px;
+    background-color: #ffffff;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #3c4043;
+    cursor: pointer;
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.google-signin-btn:hover {
+    background-color: #f8f9fa;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.google-signin-btn:active {
+    background-color: #f1f3f4;
+}
+
+.google-icon {
+    flex-shrink: 0;
+}

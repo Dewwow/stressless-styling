@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Notes__c</fullName>
+    <label>Notes</label>
+    <type>TextArea</type>
+    <description>Notes specific to this service</description>
+    <inlineHelpText>Any special instructions for this service</inlineHelpText>
+</CustomField>

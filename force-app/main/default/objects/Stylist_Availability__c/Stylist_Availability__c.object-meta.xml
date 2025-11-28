@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Stylist Availability</label>
+    <pluralLabel>Stylist Availability</pluralLabel>
+    <nameField>
+        <label>Availability Name</label>
+        <displayFormat>AVL-{0000}</displayFormat>
+        <type>AutoNumber</type>
+    </nameField>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <sharingModel>ControlledByParent</sharingModel>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableActivities>false</enableActivities>
+    <description>Defines working hours for each stylist by day of week</description>
+    <searchLayouts>
+        <searchResultsAdditionalFields>Stylist__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Day_of_Week__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Start_Time__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>End_Time__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Active__c</searchResultsAdditionalFields>
+    </searchLayouts>
+</CustomObject>

@@ -1,51 +1,336 @@
 <template>
-    <div class="container">
-        <div class="header">
-            <div class="profile">
-                <div class="avatar"></div>
-                <div class="name">jane doe</div>
-            </div>
-            <!---- -->
-            <!---- Hello from EJ -->
-            <div class="menu-icons">
-                <lightning-icon icon-name="utility:menu" size="small"></lightning-icon>
-                <lightning-icon icon-name="utility:home" size="small"></lightning-icon>
-            </div>
+    <!-- Loading State -->
+    <template if:true={isLoading}>
+        <div class="slds-align_absolute-center slds-p-around_large">
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
         </div>
-        
-        <div class="appointments">
-            <h2>Upcoming Appointments</h2>
-            <div class="appointment">
-                <span>MM/DD 00:00</span>
-                <span>appointment type</span>
-            </div>
-            <div class="appointment">
-                <span>MM/DD 00:00</span>
-                <span>appointment type</span>
-            </div>
-            <a href="#">schedule new appointment</a>
+    </template>
+
+    <!-- Error State -->
+    <template if:true={error}>
+        <div class="slds-notify slds-notify_alert slds-alert_error" role="alert">
+            <span class="slds-assistive-text">error</span>
+            <h2>{error}</h2>
         </div>
-        
-        <div class="photos">
-            <h2>View Your Photos</h2>
-            <div class="photo"></div>
-            <a href="#">open references</a>
-            <a href="#">open progress</a>
-            <a href="#">open gallery</a>
+    </template>
+
+    <!-- Main Content -->
+    <template if:false={isLoading}>
+        <div class="dashboard-container slds-p-around_medium">
+
+            <!-- Header with Auth -->
+            <div class="slds-grid slds-wrap slds-p-bottom_medium header-section">
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-3">
+                    <template if:true={isSignedIn}>
+                        <div class="slds-media slds-media_center">
+                            <div class="slds-media__figure">
+                                <span class="slds-avatar slds-avatar_large">
+                                    <lightning-icon icon-name="standard:user" size="large"></lightning-icon>
+                                </span>
+                            </div>
+                            <div class="slds-media__body">
+                                <h1 class="slds-text-heading_medium">{userName}</h1>
+                                <template if:true={userTitle}>
+                                    <p class="slds-text-body_small slds-text-color_weak">{userTitle}</p>
+                                </template>
+                            </div>
+                        </div>
+                    </template>
+                    <template if:false={isSignedIn}>
+                        <h1 class="slds-text-heading_medium">Welcome to Stressless Styling</h1>
+                        <p class="slds-text-body_regular slds-text-color_weak">Sign in to manage your appointments</p>
+                    </template>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-text-align_right">
+                    <c-google-auth
+                        google-client-id={googleClientId}
+                        onsignin={handleSignIn}
+                        onsignout={handleSignOut}>
+                    </c-google-auth>
+                </div>
+            </div>
+
+            <!-- NOT SIGNED IN VIEW -->
+            <template if:false={isSignedIn}>
+                <!-- Welcome Section -->
+                <div class="slds-card slds-m-bottom_medium">
+                    <div class="slds-card__body slds-card__body_inner slds-text-align_center slds-p-around_large">
+                        <lightning-icon icon-name="custom:custom41" size="large" class="slds-m-bottom_medium"></lightning-icon>
+                        <h2 class="slds-text-heading_medium">Book Your Next Appointment</h2>
+                        <p class="slds-text-body_regular slds-m-top_small">
+                            Sign in with your Google account to view your appointments and book new services.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Our Stylists (visible to everyone) -->
+                <div class="slds-card">
+                    <div class="slds-card__header">
+                        <header class="slds-media slds-media_center">
+                            <div class="slds-media__figure">
+                                <lightning-icon icon-name="standard:people" size="small"></lightning-icon>
+                            </div>
+                            <div class="slds-media__body">
+                                <h2 class="slds-card__header-title">Our Stylists</h2>
+                            </div>
+                        </header>
+                    </div>
+                    <div class="slds-card__body slds-card__body_inner">
+                        <div class="slds-grid slds-wrap slds-gutters_small">
+                            <template for:each={stylists} for:item="stylist">
+                                <div key={stylist.stylistId} class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3 slds-p-bottom_small">
+                                    <div class="slds-box slds-box_x-small">
+                                        <div class="slds-media">
+                                            <div class="slds-media__figure">
+                                                <span class="slds-avatar slds-avatar_medium">
+                                                    <lightning-icon icon-name="standard:user" size="small"></lightning-icon>
+                                                </span>
+                                            </div>
+                                            <div class="slds-media__body">
+                                                <p class="slds-text-heading_small">{stylist.name}</p>
+                                                <p class="slds-text-body_small slds-text-color_weak">{stylist.title}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </template>
+
+            <!-- CUSTOMER VIEW -->
+            <template if:true={isCustomer}>
+                <!-- Upcoming Appointments -->
+                <div class="slds-card slds-m-bottom_medium">
+                    <div class="slds-card__header slds-grid">
+                        <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                            <div class="slds-media__figure">
+                                <lightning-icon icon-name="standard:event" size="small"></lightning-icon>
+                            </div>
+                            <div class="slds-media__body">
+                                <h2 class="slds-card__header-title">Upcoming Appointments</h2>
+                            </div>
+                        </header>
+                        <div class="slds-no-flex">
+                            <lightning-button
+                                label="Book New"
+                                variant="brand"
+                                onclick={handleBookAppointment}>
+                            </lightning-button>
+                        </div>
+                    </div>
+                    <div class="slds-card__body slds-card__body_inner">
+                        <template if:true={hasUpcomingAppointments}>
+                            <ul class="slds-has-dividers_bottom-space">
+                                <template for:each={upcomingAppointments} for:item="apt">
+                                    <li key={apt.appointmentId} class="slds-item slds-p-vertical_small">
+                                        <div class="slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                                <p class="slds-text-heading_small">{apt.formattedDateTime}</p>
+                                                <p class="slds-text-body_regular">{apt.serviceNames}</p>
+                                                <p class="slds-text-body_small slds-text-color_weak">
+                                                    with {apt.stylistName}
+                                                </p>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-text-align_right">
+                                                <span class={apt.statusClass}>{apt.status}</span>
+                                                <p class="slds-text-body_small slds-m-top_xx-small">
+                                                    {apt.formattedPrice} - {apt.formattedDuration}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </template>
+                            </ul>
+                        </template>
+                        <template if:false={hasUpcomingAppointments}>
+                            <div class="slds-align_absolute-center slds-p-around_medium">
+                                <div class="slds-text-align_center">
+                                    <lightning-icon icon-name="utility:event" size="large" class="slds-m-bottom_small"></lightning-icon>
+                                    <p class="slds-text-body_regular">No upcoming appointments</p>
+                                    <p class="slds-text-body_small slds-text-color_weak">Book your next visit today</p>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- Past Appointments -->
+                <template if:true={hasPastAppointments}>
+                    <div class="slds-card slds-m-bottom_medium">
+                        <div class="slds-card__header">
+                            <header class="slds-media slds-media_center">
+                                <div class="slds-media__figure">
+                                    <lightning-icon icon-name="standard:record" size="small"></lightning-icon>
+                                </div>
+                                <div class="slds-media__body">
+                                    <h2 class="slds-card__header-title">Past Visits</h2>
+                                </div>
+                            </header>
+                        </div>
+                        <div class="slds-card__body slds-card__body_inner">
+                            <ul class="slds-has-dividers_bottom-space">
+                                <template for:each={pastAppointments} for:item="apt">
+                                    <li key={apt.appointmentId} class="slds-item slds-p-vertical_x-small">
+                                        <div class="slds-grid">
+                                            <div class="slds-col">
+                                                <p class="slds-text-body_small">{apt.formattedDate}</p>
+                                                <p class="slds-text-body_small slds-text-color_weak">{apt.serviceNames}</p>
+                                            </div>
+                                            <div class="slds-col slds-text-align_right">
+                                                <span class={apt.statusClass}>{apt.status}</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- Our Stylists -->
+                <div class="slds-card">
+                    <div class="slds-card__header">
+                        <header class="slds-media slds-media_center">
+                            <div class="slds-media__figure">
+                                <lightning-icon icon-name="standard:people" size="small"></lightning-icon>
+                            </div>
+                            <div class="slds-media__body">
+                                <h2 class="slds-card__header-title">Our Stylists</h2>
+                            </div>
+                        </header>
+                    </div>
+                    <div class="slds-card__body slds-card__body_inner">
+                        <div class="slds-grid slds-wrap slds-gutters_small">
+                            <template for:each={stylists} for:item="stylist">
+                                <div key={stylist.stylistId} class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3 slds-p-bottom_small">
+                                    <div class="slds-box slds-box_x-small">
+                                        <div class="slds-media">
+                                            <div class="slds-media__figure">
+                                                <span class="slds-avatar slds-avatar_medium">
+                                                    <lightning-icon icon-name="standard:user" size="small"></lightning-icon>
+                                                </span>
+                                            </div>
+                                            <div class="slds-media__body">
+                                                <p class="slds-text-heading_small">{stylist.name}</p>
+                                                <p class="slds-text-body_small slds-text-color_weak">{stylist.title}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </template>
+
+            <!-- Booking Modal -->
+            <c-booking-modal
+                contact-id={userSession.contactId}
+                onbookingsuccess={handleBookingSuccess}>
+            </c-booking-modal>
+
+            <!-- STYLIST VIEW -->
+            <template if:true={isStylist}>
+                <!-- Today's Schedule -->
+                <div class="slds-card slds-m-bottom_medium">
+                    <div class="slds-card__header slds-grid">
+                        <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                            <div class="slds-media__figure">
+                                <lightning-icon icon-name="standard:today" size="small"></lightning-icon>
+                            </div>
+                            <div class="slds-media__body">
+                                <h2 class="slds-card__header-title">Your Schedule</h2>
+                            </div>
+                        </header>
+                        <div class="slds-no-flex">
+                            <lightning-button
+                                label="Full Schedule"
+                                variant="neutral"
+                                onclick={handleViewSchedule}>
+                            </lightning-button>
+                        </div>
+                    </div>
+                    <div class="slds-card__body slds-card__body_inner">
+                        <template if:true={hasUpcomingAppointments}>
+                            <ul class="slds-has-dividers_bottom-space">
+                                <template for:each={upcomingAppointments} for:item="apt">
+                                    <li key={apt.appointmentId} class="slds-item slds-p-vertical_small">
+                                        <div class="slds-grid slds-wrap">
+                                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                                <p class="slds-text-heading_small">{apt.formattedDateTime}</p>
+                                                <p class="slds-text-body_regular slds-text-title_bold">{apt.customerName}</p>
+                                                <p class="slds-text-body_small">{apt.serviceNames}</p>
+                                                <template if:true={apt.notes}>
+                                                    <p class="slds-text-body_small slds-text-color_weak slds-m-top_xx-small">
+                                                        Note: {apt.notes}
+                                                    </p>
+                                                </template>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-text-align_right">
+                                                <span class={apt.statusClass}>{apt.status}</span>
+                                                <p class="slds-text-body_small slds-m-top_xx-small">
+                                                    {apt.formattedDuration}
+                                                </p>
+                                                <template if:true={apt.customerPhone}>
+                                                    <p class="slds-text-body_small slds-text-color_weak">
+                                                        {apt.customerPhone}
+                                                    </p>
+                                                </template>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </template>
+                            </ul>
+                        </template>
+                        <template if:false={hasUpcomingAppointments}>
+                            <div class="slds-align_absolute-center slds-p-around_medium">
+                                <div class="slds-text-align_center">
+                                    <lightning-icon icon-name="utility:check" size="large" class="slds-m-bottom_small"></lightning-icon>
+                                    <p class="slds-text-body_regular">No upcoming appointments</p>
+                                    <p class="slds-text-body_small slds-text-color_weak">Enjoy your free time</p>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- Recent Clients -->
+                <template if:true={hasPastAppointments}>
+                    <div class="slds-card">
+                        <div class="slds-card__header">
+                            <header class="slds-media slds-media_center">
+                                <div class="slds-media__figure">
+                                    <lightning-icon icon-name="standard:recent" size="small"></lightning-icon>
+                                </div>
+                                <div class="slds-media__body">
+                                    <h2 class="slds-card__header-title">Recent Clients</h2>
+                                </div>
+                            </header>
+                        </div>
+                        <div class="slds-card__body slds-card__body_inner">
+                            <ul class="slds-has-dividers_bottom-space">
+                                <template for:each={pastAppointments} for:item="apt">
+                                    <li key={apt.appointmentId} class="slds-item slds-p-vertical_x-small">
+                                        <div class="slds-grid">
+                                            <div class="slds-col">
+                                                <p class="slds-text-body_regular">{apt.customerName}</p>
+                                                <p class="slds-text-body_small slds-text-color_weak">
+                                                    {apt.formattedDate} - {apt.serviceNames}
+                                                </p>
+                                            </div>
+                                            <div class="slds-col slds-text-align_right">
+                                                <span class={apt.statusClass}>{apt.status}</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+                    </div>
+                </template>
+            </template>
         </div>
-        
-        <div class="products">
-            <h2>Recommended Products</h2>
-            <div class="product">
-                <span>$000.00</span>
-            </div>
-            <div class="product">
-                <span>$000.00</span>
-            </div>
-            <div class="product">
-                <span>$000.00</span>
-            </div>
-            <a href="#">see more</a>
-        </div>
-    </div>
+    </template>
 </template>

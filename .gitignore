@@ -3,6 +3,9 @@
 /src.orig
 /src
 
+# Generated dataset database (regenerate with: python datasets/sample/build_database.py)
+datasets/sample/sample.db
+
 # Python
 *.pyc
 __pycache__

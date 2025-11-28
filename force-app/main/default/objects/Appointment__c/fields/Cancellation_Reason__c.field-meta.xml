@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cancellation_Reason__c</fullName>
+    <label>Cancellation Reason</label>
+    <type>Picklist</type>
+    <description>Reason for cancellation if appointment was cancelled</description>
+    <inlineHelpText>Why was this appointment cancelled?</inlineHelpText>
+    <valueSet>
+        <restricted>false</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Customer Request</fullName>
+                <default>false</default>
+                <label>Customer Request</label>
+            </value>
+            <value>
+                <fullName>Stylist Unavailable</fullName>
+                <default>false</default>
+                <label>Stylist Unavailable</label>
+            </value>
+            <value>
+                <fullName>Schedule Conflict</fullName>
+                <default>false</default>
+                <label>Schedule Conflict</label>
+            </value>
+            <value>
+                <fullName>Weather</fullName>
+                <default>false</default>
+                <label>Weather</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

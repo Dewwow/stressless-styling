@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Stylist_Service__c</fullName>
+    <label>Stylist Service</label>
+    <type>Lookup</type>
+    <referenceTo>Stylist_Service__c</referenceTo>
+    <relationshipLabel>Appointment Services</relationshipLabel>
+    <relationshipName>Appointment_Services</relationshipName>
+    <description>Optional link to specific stylist-service record used</description>
+    <inlineHelpText>The specific stylist-service combination for pricing/duration</inlineHelpText>
+</CustomField>

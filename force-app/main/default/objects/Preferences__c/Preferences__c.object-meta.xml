@@ -161,7 +161,12 @@
         <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Preferences</pluralLabel>
-    <searchLayouts></searchLayouts>
+    <searchLayouts>
+        <searchResultsAdditionalFields>Contact__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Preference_Date__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Hair_Type__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Communication_Preference__c</searchResultsAdditionalFields>
+    </searchLayouts>
     <sharingModel>ControlledByParent</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

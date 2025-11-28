@@ -1,0 +1,13 @@
+Id,Customer__c,Stylist__c,Appointment_Date__c,Start_Time__c,Status__c,Notes__c,Booked_Online__c
+apt-1,con-sarah,styl-maria,2024-12-02,10:00:00.000Z,Scheduled,Color touch-up and trim,true
+apt-2,con-james,styl-alex,2024-12-02,14:00:00.000Z,Scheduled,,false
+apt-3,con-emily,styl-maria,2024-12-03,09:00:00.000Z,Confirmed,Balayage appointment - first time,true
+apt-4,con-jessica,styl-jordan,2024-12-03,10:00:00.000Z,Scheduled,Gel mani-pedi combo,true
+apt-5,con-michael,styl-alex,2024-12-04,11:00:00.000Z,Scheduled,,false
+apt-6,con-amanda,styl-maria,2024-12-04,13:00:00.000Z,Confirmed,Color correction - be careful with chemicals,true
+apt-7,con-david,styl-taylor,2024-12-05,12:00:00.000Z,Scheduled,First visit,false
+apt-8,con-chris,styl-jordan,2024-12-05,14:00:00.000Z,Scheduled,Facial and manicure,true
+apt-9,con-sarah,styl-alex,2024-11-25,10:00:00.000Z,Completed,,false
+apt-10,con-james,styl-maria,2024-11-20,15:00:00.000Z,Completed,Color came out great,false
+apt-11,con-emily,styl-jordan,2024-11-18,11:00:00.000Z,Completed,,true
+apt-12,con-michael,styl-taylor,2024-11-15,13:00:00.000Z,No Show,,false

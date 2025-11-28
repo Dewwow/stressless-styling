@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Preference_Date__c</fullName>
+    <label>Preference Date</label>
+    <type>Date</type>
+    <description>Date these preferences were recorded</description>
+    <inlineHelpText>When were these preferences captured?</inlineHelpText>
+</CustomField>

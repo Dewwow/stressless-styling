@@ -1,0 +1,16 @@
+{
+  "type" : "sfdc_cms__trustedSites",
+  "title" : "trustedSites",
+  "contentBody" : {
+    "trustedSites" : [ {
+      "isActive" : true,
+      "source" : "https://accounts.google.com/gsi/client",
+      "sourceName" : "GoogleAccounts"
+    }, {
+      "isActive" : true,
+      "source" : "https://*.googleapis.com",
+      "sourceName" : "GoogleApis"
+    } ]
+  },
+  "urlName" : "trustedsites"
+}

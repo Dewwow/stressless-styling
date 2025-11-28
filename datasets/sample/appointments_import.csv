@@ -1,0 +1,13 @@
+Customer__c,Stylist__c,Appointment_Date__c,Start_Time__c,Status__c,Notes__c,Booked_Online__c
+003Nq00000wzFkMIAU,a07Nq00003dwa2MIAQ,2024-12-02,10:00:00.000Z,Scheduled,Color touch-up and trim,true
+003Nq00000wzFkNIAU,a07Nq00003dwa2KIAQ,2024-12-02,14:00:00.000Z,Scheduled,,false
+003Nq00000wzFkOIAU,a07Nq00003dwa2MIAQ,2024-12-03,09:00:00.000Z,Confirmed,Balayage appointment - first time,true
+003Nq00000wzFkQIAU,a07Nq00003dwa2LIAQ,2024-12-03,10:00:00.000Z,Scheduled,Gel mani-pedi combo,true
+003Nq00000wzFkPIAU,a07Nq00003dwa2KIAQ,2024-12-04,11:00:00.000Z,Scheduled,,false
+003Nq00000wzFkSIAU,a07Nq00003dwa2MIAQ,2024-12-04,13:00:00.000Z,Confirmed,Color correction - be careful with chemicals,true
+003Nq00000wzFkRIAU,a07Nq00003dwa2NIAQ,2024-12-05,12:00:00.000Z,Scheduled,First visit,false
+003Nq00000wzFkTIAU,a07Nq00003dwa2LIAQ,2024-12-05,14:00:00.000Z,Scheduled,Facial and manicure,true
+003Nq00000wzFkMIAU,a07Nq00003dwa2KIAQ,2024-11-25,10:00:00.000Z,Completed,,false
+003Nq00000wzFkNIAU,a07Nq00003dwa2MIAQ,2024-11-20,15:00:00.000Z,Completed,Color came out great,false
+003Nq00000wzFkOIAU,a07Nq00003dwa2LIAQ,2024-11-18,11:00:00.000Z,Completed,,true
+003Nq00000wzFkPIAU,a07Nq00003dwa2NIAQ,2024-11-15,13:00:00.000Z,No Show,,false

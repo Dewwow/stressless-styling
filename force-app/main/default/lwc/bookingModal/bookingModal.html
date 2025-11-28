@@ -1,0 +1,216 @@
+<template>
+    <template if:true={isOpen}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_large">
+            <div class="slds-modal__container">
+                <!-- Header -->
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            title="Close" onclick={handleClose}>
+                        <lightning-icon icon-name="utility:close" alternative-text="Close" size="small"></lightning-icon>
+                    </button>
+                    <h2 class="slds-modal__title slds-hyphenate">Book Appointment</h2>
+                    <p class="slds-text-body_small slds-m-top_x-small">Step {currentStep} of 4: {stepTitle}</p>
+                </header>
+
+                <!-- Body -->
+                <div class="slds-modal__content slds-p-around_medium">
+                    <!-- Loading -->
+                    <template if:true={isLoading}>
+                        <div class="slds-align_absolute-center slds-p-around_large">
+                            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                        </div>
+                    </template>
+
+                    <!-- Error -->
+                    <template if:true={error}>
+                        <div class="slds-notify slds-notify_alert slds-alert_error slds-m-bottom_medium" role="alert">
+                            <span>{error}</span>
+                        </div>
+                    </template>
+
+                    <template if:false={isLoading}>
+                        <!-- Step 1: Select Stylist -->
+                        <template if:true={isStep1}>
+                            <div class="slds-grid slds-wrap slds-gutters">
+                                <template for:each={stylists} for:item="stylist">
+                                    <div key={stylist.stylistId} class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-p-bottom_small">
+                                        <div class={stylist.stylistId} data-id={stylist.stylistId} onclick={handleStylistSelect}>
+                                            <article class="slds-card stylist-card" data-selected={selectedStylistId}>
+                                                <div class="slds-card__body slds-card__body_inner">
+                                                    <div class="slds-media">
+                                                        <div class="slds-media__figure">
+                                                            <span class="slds-avatar slds-avatar_large">
+                                                                <lightning-icon icon-name="standard:user" size="medium"></lightning-icon>
+                                                            </span>
+                                                        </div>
+                                                        <div class="slds-media__body">
+                                                            <h3 class="slds-text-heading_small">{stylist.name}</h3>
+                                                            <p class="slds-text-body_small slds-text-color_weak">{stylist.title}</p>
+                                                            <template if:true={stylist.bio}>
+                                                                <p class="slds-text-body_small slds-m-top_x-small">{stylist.bio}</p>
+                                                            </template>
+                                                        </div>
+                                                        <div class="slds-media__figure slds-media__figure_reverse">
+                                                            <template if:true={stylist.isSelected}>
+                                                                <lightning-icon icon-name="utility:check" variant="success" size="small"></lightning-icon>
+                                                            </template>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                        </template>
+
+                        <!-- Step 2: Select Services -->
+                        <template if:true={isStep2}>
+                            <template for:each={serviceCategories} for:item="category">
+                                <div key={category.categoryId} class="slds-m-bottom_medium">
+                                    <h3 class="slds-text-heading_small slds-m-bottom_small">{category.name}</h3>
+                                    <template if:true={category.description}>
+                                        <p class="slds-text-body_small slds-text-color_weak slds-m-bottom_small">{category.description}</p>
+                                    </template>
+                                    <div class="slds-grid slds-wrap slds-gutters_small">
+                                        <template for:each={category.services} for:item="service">
+                                            <div key={service.serviceId} class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-p-bottom_x-small">
+                                                <div class="slds-box slds-box_x-small service-item" data-id={service.serviceId} onclick={handleServiceToggle}>
+                                                    <div class="slds-grid slds-grid_vertical-align-center">
+                                                        <div class="slds-col slds-grow">
+                                                            <p class="slds-text-body_regular">{service.name}</p>
+                                                            <p class="slds-text-body_small slds-text-color_weak">
+                                                                ${service.price} - {service.duration} min
+                                                            </p>
+                                                        </div>
+                                                        <div class="slds-col slds-no-flex">
+                                                            <input type="checkbox" data-id={service.serviceId}
+                                                                   class="slds-checkbox" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                            </template>
+
+                            <!-- Selected services summary -->
+                            <template if:true={selectedServices.length}>
+                                <div class="slds-box slds-box_x-small slds-theme_shade slds-m-top_medium">
+                                    <p class="slds-text-body_small">
+                                        <strong>Selected:</strong> {selectedServiceNames}
+                                    </p>
+                                    <p class="slds-text-body_small">
+                                        <strong>Total:</strong> {formattedTotalPrice} - {formattedTotalDuration}
+                                    </p>
+                                </div>
+                            </template>
+                        </template>
+
+                        <!-- Step 3: Select Date & Time -->
+                        <template if:true={isStep3}>
+                            <div class="slds-grid slds-wrap slds-gutters">
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-p-bottom_medium">
+                                    <lightning-input
+                                        type="date"
+                                        label="Select Date"
+                                        value={selectedDate}
+                                        min={minDate}
+                                        max={maxDate}
+                                        onchange={handleDateChange}
+                                        required>
+                                    </lightning-input>
+                                </div>
+                            </div>
+
+                            <template if:true={selectedDate}>
+                                <h3 class="slds-text-heading_small slds-m-bottom_small">Available Times for {formattedSelectedDate}</h3>
+                                <template if:true={availableSlots.length}>
+                                    <div class="slds-grid slds-wrap slds-gutters_x-small">
+                                        <template for:each={availableSlots} for:item="slot">
+                                            <div key={slot.value} class="slds-col slds-p-bottom_x-small">
+                                                <button class="slds-button slds-button_neutral time-slot-btn"
+                                                        data-value={slot.value}
+                                                        onclick={handleSlotSelect}>
+                                                    {slot.displayTime}
+                                                </button>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </template>
+                                <template if:false={availableSlots.length}>
+                                    <p class="slds-text-body_regular slds-text-color_weak">
+                                        No available times for this date. Please select another date.
+                                    </p>
+                                </template>
+                            </template>
+
+                            <template if:true={selectedSlot}>
+                                <div class="slds-box slds-box_x-small slds-theme_success slds-m-top_medium">
+                                    <p class="slds-text-body_regular">
+                                        <lightning-icon icon-name="utility:check" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                                        Selected: {selectedSlotDisplay}
+                                    </p>
+                                </div>
+                            </template>
+                        </template>
+
+                        <!-- Step 4: Confirm -->
+                        <template if:true={isStep4}>
+                            <div class="slds-box slds-m-bottom_medium">
+                                <h3 class="slds-text-heading_small slds-m-bottom_medium">Booking Summary</h3>
+
+                                <dl class="slds-dl_horizontal">
+                                    <dt class="slds-dl_horizontal__label">Stylist:</dt>
+                                    <dd class="slds-dl_horizontal__detail">{selectedStylist.name}</dd>
+
+                                    <dt class="slds-dl_horizontal__label">Services:</dt>
+                                    <dd class="slds-dl_horizontal__detail">{selectedServiceNames}</dd>
+
+                                    <dt class="slds-dl_horizontal__label">Date:</dt>
+                                    <dd class="slds-dl_horizontal__detail">{formattedSelectedDate}</dd>
+
+                                    <dt class="slds-dl_horizontal__label">Time:</dt>
+                                    <dd class="slds-dl_horizontal__detail">{selectedSlotDisplay}</dd>
+
+                                    <dt class="slds-dl_horizontal__label">Duration:</dt>
+                                    <dd class="slds-dl_horizontal__detail">{formattedTotalDuration}</dd>
+
+                                    <dt class="slds-dl_horizontal__label">Total Price:</dt>
+                                    <dd class="slds-dl_horizontal__detail"><strong>{formattedTotalPrice}</strong></dd>
+                                </dl>
+                            </div>
+
+                            <lightning-textarea
+                                label="Notes (optional)"
+                                value={notes}
+                                placeholder="Any special requests or notes for your stylist"
+                                onchange={handleNotesChange}
+                                max-length="500">
+                            </lightning-textarea>
+                        </template>
+                    </template>
+                </div>
+
+                <!-- Footer -->
+                <footer class="slds-modal__footer">
+                    <template if:true={canGoBack}>
+                        <button class="slds-button slds-button_neutral" onclick={handleBack}>Back</button>
+                    </template>
+                    <template if:false={isStep4}>
+                        <button class="slds-button slds-button_brand" disabled={disableNext} onclick={handleNext}>
+                            {nextButtonLabel}
+                        </button>
+                    </template>
+                    <template if:true={isStep4}>
+                        <button class="slds-button slds-button_brand" onclick={handleConfirmBooking} disabled={isLoading}>
+                            Confirm Booking
+                        </button>
+                    </template>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

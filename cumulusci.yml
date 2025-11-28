@@ -10,6 +10,14 @@ project:
     source_format: sfdx
 
 tasks:
+    load_sample_data:
+        description: Load sample salon data (categories, services, stylists, etc.)
+        class_path: cumulusci.tasks.bulkdata.load.LoadData
+        group: Data
+        options:
+            mapping: datasets/sample/mapping.yml
+            database_url: "sqlite:///datasets/sample/sample.db"
+
     robot:
         options:
             suites: robot/stressless-styling/tests
@@ -31,10 +39,13 @@ tasks:
 flows:
     dev_org:
         steps:
-            1.4: 
+            1.4:
                 task: update_debug_mode
             1.5:
                 task: create_community
                 options:
                     name: stressless
                     template: Build Your Own (LWR)
+            3:
+                task: load_sample_data
+                description: Load sample salon data

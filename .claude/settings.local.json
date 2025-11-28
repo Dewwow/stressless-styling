@@ -12,7 +12,12 @@
       "Bash(cci service connect:*)",
       "Bash(printf:*)",
       "Bash(cci task run:*)",
-      "Bash(cci org browser dev:*)"
+      "Bash(cci org browser dev:*)",
+      "Bash(sqlite3:*)",
+      "Bash(chmod:*)",
+      "Bash(python3:*)",
+      "Bash(find:*)",
+      "Bash(echo:*)"
     ],
     "deny": [],
     "ask": []

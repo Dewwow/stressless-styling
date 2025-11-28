@@ -1,0 +1,43 @@
+.stylist-card {
+    cursor: pointer;
+    transition: box-shadow 0.2s, border-color 0.2s;
+    border: 2px solid transparent;
+}
+
+.stylist-card:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.stylist-card[data-selected="true"] {
+    border-color: #0176d3;
+    background-color: #f0f8ff;
+}
+
+.service-item {
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.service-item:hover {
+    background-color: #f3f3f3;
+}
+
+.time-slot-btn {
+    min-width: 90px;
+}
+
+.time-slot-btn:focus,
+.time-slot-btn[aria-pressed="true"] {
+    background-color: #0176d3;
+    color: white;
+}
+
+.slds-dl_horizontal__label {
+    width: 100px;
+}
+
+.slds-modal__content {
+    min-height: 300px;
+    max-height: 60vh;
+    overflow-y: auto;
+}

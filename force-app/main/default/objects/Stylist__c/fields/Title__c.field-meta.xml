@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Title__c</fullName>
+    <label>Title</label>
+    <type>Picklist</type>
+    <description>Professional title or level</description>
+    <inlineHelpText>Stylist's professional level</inlineHelpText>
+    <valueSet>
+        <restricted>false</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Junior Stylist</fullName>
+                <default>false</default>
+                <label>Junior Stylist</label>
+            </value>
+            <value>
+                <fullName>Stylist</fullName>
+                <default>true</default>
+                <label>Stylist</label>
+            </value>
+            <value>
+                <fullName>Senior Stylist</fullName>
+                <default>false</default>
+                <label>Senior Stylist</label>
+            </value>
+            <value>
+                <fullName>Master Stylist</fullName>
+                <default>false</default>
+                <label>Master Stylist</label>
+            </value>
+            <value>
+                <fullName>Salon Director</fullName>
+                <default>false</default>
+                <label>Salon Director</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

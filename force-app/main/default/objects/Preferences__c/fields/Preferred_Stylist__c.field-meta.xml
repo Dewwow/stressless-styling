@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Preferred_Stylist__c</fullName>
+    <label>Preferred Stylist</label>
+    <type>Lookup</type>
+    <referenceTo>Stylist__c</referenceTo>
+    <relationshipLabel>Customer Preferences</relationshipLabel>
+    <relationshipName>Preferences</relationshipName>
+    <description>Customer's preferred stylist</description>
+    <inlineHelpText>Which stylist does this customer prefer?</inlineHelpText>
+</CustomField>

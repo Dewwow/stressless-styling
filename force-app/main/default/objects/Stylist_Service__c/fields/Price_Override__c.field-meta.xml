@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Price_Override__c</fullName>
+    <label>Price Override</label>
+    <type>Currency</type>
+    <precision>8</precision>
+    <scale>2</scale>
+    <description>Custom price if this stylist charges differently than standard</description>
+    <inlineHelpText>Leave blank to use standard service price. Enter amount if this stylist charges a different rate.</inlineHelpText>
+</CustomField>

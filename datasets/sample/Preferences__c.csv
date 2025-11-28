@@ -1,0 +1,7 @@
+Id,Contact__c,Preferred_Stylist__c,Hair_Type__c,Hair_Texture__c,Scalp_Sensitivity__c,Chemical_Treated__c,Communication_Preference__c,Allergies_Notes__c
+pref-sarah,con-sarah,styl-maria,Wavy,Medium,Normal,true,Email,
+pref-james,con-james,styl-alex,Straight,Coarse,Normal,false,SMS,
+pref-emily,con-emily,styl-maria,Curly,Fine,Sensitive,true,Email,Allergic to ammonia-based products
+pref-michael,con-michael,styl-alex,Straight,Medium,Normal,false,Phone,
+pref-jessica,con-jessica,styl-jordan,Wavy,Fine,Normal,false,SMS,
+pref-amanda,con-amanda,styl-maria,Coily,Coarse,Very Sensitive,true,Email,Sensitive to sulfates and parabens

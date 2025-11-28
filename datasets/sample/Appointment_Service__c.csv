@@ -1,0 +1,21 @@
+Id,Appointment__c,Service__c,Price__c,Duration_Minutes__c,Notes__c
+as-1a,apt-1,svc-color-single,85.00,90,
+as-1b,apt-1,svc-haircut,55.00,45,Trim only
+as-2a,apt-2,svc-haircut,45.00,45,
+as-3a,apt-3,svc-color-balayage,150.00,150,
+as-3b,apt-3,svc-deep-condition,25.00,20,
+as-4a,apt-4,svc-gel-mani,45.00,45,
+as-4b,apt-4,svc-gel-pedi,60.00,60,
+as-5a,apt-5,svc-haircut,45.00,45,
+as-5b,apt-5,svc-blowout,35.00,30,
+as-6a,apt-6,svc-color-highlights,140.00,120,Extra care needed
+as-6b,apt-6,svc-deep-condition,25.00,20,
+as-7a,apt-7,svc-haircut,40.00,45,New client discount
+as-8a,apt-8,svc-facial-basic,50.00,30,
+as-8b,apt-8,svc-manicure,30.00,30,
+as-9a,apt-9,svc-haircut,45.00,45,
+as-9b,apt-9,svc-blowout,35.00,30,
+as-10a,apt-10,svc-color-single,85.00,90,
+as-11a,apt-11,svc-pedicure,45.00,45,
+as-11b,apt-11,svc-nail-art,25.00,50,5 nails with design
+as-12a,apt-12,svc-haircut,40.00,45,

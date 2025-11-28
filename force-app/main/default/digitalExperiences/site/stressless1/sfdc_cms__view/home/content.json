@@ -9,13 +9,16 @@
             "backgroundImageConfig" : "",
             "backgroundImageOverlay" : "rgba(0,0,0,0)",
             "componentSpacerSize" : "",
+            "dxpStyle" : { },
             "maxContentWidth" : "",
             "sectionColumnGutterWidth" : "",
             "sectionConfig" : "{\"UUID\":\"a75d3cd5-8295-43f0-8b45-d3c83f99e167\",\"columns\":[{\"UUID\":\"2514881f-27bf-440a-9c26-f2bff914b12c\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":null}]}"
           },
           "children" : [ {
             "children" : [ {
-              "attributes" : { },
+              "attributes" : {
+                "dxpStyle" : { }
+              },
               "definition" : "c:dashboard",
               "id" : "5fd9fd97-9500-4b43-b173-7a19e19b0f76",
               "type" : "component"
@@ -38,6 +41,7 @@
           "attributes" : {
             "customHeadTags" : "",
             "description" : "",
+            "dxpStyle" : { },
             "pageTitle" : "Home",
             "recordId" : "{!recordId}"
           },
@@ -57,5 +61,6 @@
     "dataProviders" : [ ],
     "themeLayoutType" : "Inner",
     "viewType" : "home"
-  }
+  },
+  "urlName" : "home"
 }

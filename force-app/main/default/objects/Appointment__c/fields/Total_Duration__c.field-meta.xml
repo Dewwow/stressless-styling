@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Total_Duration__c</fullName>
+    <label>Total Duration (Minutes)</label>
+    <type>Number</type>
+    <precision>5</precision>
+    <scale>0</scale>
+    <description>Total duration for all services</description>
+    <inlineHelpText>Total time needed for all services in this appointment</inlineHelpText>
+</CustomField>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Appointment</label>
+    <pluralLabel>Appointments</pluralLabel>
+    <nameField>
+        <label>Appointment Number</label>
+        <displayFormat>APT-{00000}</displayFormat>
+        <type>AutoNumber</type>
+    </nameField>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <sharingModel>ReadWrite</sharingModel>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableActivities>true</enableActivities>
+    <description>Customer appointment bookings</description>
+    <searchLayouts>
+        <searchResultsAdditionalFields>Customer__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Stylist__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Appointment_Date__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Start_Time__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
+    </searchLayouts>
+</CustomObject>
