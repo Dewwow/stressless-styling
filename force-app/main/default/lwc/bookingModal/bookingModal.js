@@ -13,9 +13,18 @@ export default class BookingModal extends LightningElement {
     @track error = '';
 
     // Data
-    @track stylists = [];
+    @track _stylists = [];
     @track serviceCategories = [];
     @track availableSlots = [];
+
+    // Computed stylists with selection state
+    get stylists() {
+        return this._stylists.map(s => ({
+            ...s,
+            isSelected: s.stylistId === this.selectedStylistId,
+            cardClass: s.stylistId === this.selectedStylistId ? 'slds-card stylist-card selected' : 'slds-card stylist-card'
+        }));
+    }
 
     // Selections
     @track selectedStylistId = null;
@@ -124,7 +133,7 @@ export default class BookingModal extends LightningElement {
     async loadStylists() {
         this.isLoading = true;
         try {
-            this.stylists = await getAvailableStylists();
+            this._stylists = await getAvailableStylists();
         } catch (err) {
             this.error = 'Error loading stylists';
             console.error(err);

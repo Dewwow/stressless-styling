@@ -138,6 +138,14 @@
                                                 <p class="slds-text-body_small slds-m-top_xx-small">
                                                     {apt.formattedPrice} - {apt.formattedDuration}
                                                 </p>
+                                                <template if:true={apt.canCancel}>
+                                                    <button class="slds-button slds-button_text-destructive slds-m-top_x-small"
+                                                            data-id={apt.appointmentId}
+                                                            data-name={apt.formattedDateTime}
+                                                            onclick={handleCancelAppointment}>
+                                                        Cancel
+                                                    </button>
+                                                </template>
                                             </div>
                                         </div>
                                     </li>
@@ -225,11 +233,13 @@
                 </div>
             </template>
 
-            <!-- Booking Modal -->
-            <c-booking-modal
-                contact-id={userSession.contactId}
-                onbookingsuccess={handleBookingSuccess}>
-            </c-booking-modal>
+            <!-- Booking Modal (only render when signed in) -->
+            <template if:true={isSignedIn}>
+                <c-booking-modal
+                    contact-id={userSession.contactId}
+                    onbookingsuccess={handleBookingSuccess}>
+                </c-booking-modal>
+            </template>
 
             <!-- STYLIST VIEW -->
             <template if:true={isStylist}>

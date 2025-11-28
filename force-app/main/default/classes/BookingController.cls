@@ -159,6 +159,44 @@ public without sharing class BookingController {
         return apt.Id;
     }
 
+    /**
+     * Cancel an appointment.
+     * @param appointmentId The appointment to cancel
+     * @param reason Optional cancellation reason
+     */
+    @AuraEnabled
+    public static void cancelAppointment(Id appointmentId, String reason) {
+        if (appointmentId == null) {
+            throw new AuraHandledException('Appointment ID is required');
+        }
+
+        List<Appointment__c> appointments = [
+            SELECT Id, Status__c, Appointment_Date__c
+            FROM Appointment__c
+            WHERE Id = :appointmentId
+            LIMIT 1
+        ];
+
+        if (appointments.isEmpty()) {
+            throw new AuraHandledException('Appointment not found');
+        }
+
+        Appointment__c apt = appointments[0];
+
+        // Check if appointment can be cancelled (not already cancelled or completed)
+        if (apt.Status__c == 'Cancelled') {
+            throw new AuraHandledException('This appointment is already cancelled');
+        }
+        if (apt.Status__c == 'Completed') {
+            throw new AuraHandledException('Cannot cancel a completed appointment');
+        }
+
+        // Update the appointment
+        apt.Status__c = 'Cancelled';
+        apt.Cancellation_Reason__c = String.isNotBlank(reason) ? reason : 'Cancelled by customer';
+        update apt;
+    }
+
     // Helper methods
 
     private static String getDayOfWeek(Date d) {

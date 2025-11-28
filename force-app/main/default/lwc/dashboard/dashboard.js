@@ -4,6 +4,7 @@ import getStylistAppointments from '@salesforce/apex/DashboardController.getStyl
 import getCustomerPastAppointments from '@salesforce/apex/DashboardController.getCustomerPastAppointments';
 import getStylistPastAppointments from '@salesforce/apex/DashboardController.getStylistPastAppointments';
 import getAvailableStylists from '@salesforce/apex/DashboardController.getAvailableStylists';
+import cancelAppointment from '@salesforce/apex/BookingController.cancelAppointment';
 
 const SESSION_KEY = 'stressless_user_session';
 
@@ -176,6 +177,9 @@ export default class Dashboard extends LightningElement {
         // Get service names as comma-separated string
         const serviceNames = apt.services?.map(s => s.serviceName).join(', ') || '';
 
+        // Appointment can be cancelled if it's Scheduled or Confirmed
+        const canCancel = ['Scheduled', 'Confirmed'].includes(apt.status);
+
         return {
             ...apt,
             formattedDate,
@@ -184,7 +188,8 @@ export default class Dashboard extends LightningElement {
             serviceNames,
             formattedPrice: apt.totalPrice ? `$${apt.totalPrice.toFixed(2)}` : '',
             formattedDuration: apt.totalDuration ? `${apt.totalDuration} min` : '',
-            statusClass: this.getStatusClass(apt.status)
+            statusClass: this.getStatusClass(apt.status),
+            canCancel
         };
     }
 
@@ -214,5 +219,31 @@ export default class Dashboard extends LightningElement {
     handleViewSchedule() {
         // Navigate to full schedule view
         console.log('View schedule clicked');
+    }
+
+    async handleCancelAppointment(event) {
+        const appointmentId = event.target.dataset.id;
+        const appointmentName = event.target.dataset.name || 'this appointment';
+
+        // Confirm cancellation
+        if (!confirm(`Are you sure you want to cancel ${appointmentName}?`)) {
+            return;
+        }
+
+        this.isLoading = true;
+        try {
+            await cancelAppointment({
+                appointmentId: appointmentId,
+                reason: 'Cancelled by customer online'
+            });
+
+            // Reload appointments to reflect the change
+            await this.loadAppointments();
+        } catch (err) {
+            console.error('Error cancelling appointment:', err);
+            this.error = err.body?.message || 'Error cancelling appointment';
+        } finally {
+            this.isLoading = false;
+        }
     }
 }

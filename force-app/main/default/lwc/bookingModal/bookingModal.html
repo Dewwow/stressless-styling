@@ -34,8 +34,8 @@
                             <div class="slds-grid slds-wrap slds-gutters">
                                 <template for:each={stylists} for:item="stylist">
                                     <div key={stylist.stylistId} class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-p-bottom_small">
-                                        <div class={stylist.stylistId} data-id={stylist.stylistId} onclick={handleStylistSelect}>
-                                            <article class="slds-card stylist-card" data-selected={selectedStylistId}>
+                                        <div data-id={stylist.stylistId} onclick={handleStylistSelect}>
+                                            <article class={stylist.cardClass}>
                                                 <div class="slds-card__body slds-card__body_inner">
                                                     <div class="slds-media">
                                                         <div class="slds-media__figure">

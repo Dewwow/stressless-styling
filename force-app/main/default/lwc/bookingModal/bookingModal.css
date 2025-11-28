@@ -1,6 +1,6 @@
 .stylist-card {
     cursor: pointer;
-    transition: box-shadow 0.2s, border-color 0.2s;
+    transition: box-shadow 0.2s, border-color 0.2s, background-color 0.2s;
     border: 2px solid transparent;
 }
 
@@ -8,9 +8,10 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.stylist-card[data-selected="true"] {
+.stylist-card.selected {
     border-color: #0176d3;
-    background-color: #f0f8ff;
+    background-color: #eaf5fe;
+    box-shadow: 0 0 0 1px #0176d3;
 }
 
 .service-item {
