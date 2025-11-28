@@ -1,4 +1,4 @@
-import { LightningElement, wire, track, api } from 'lwc';
+import { LightningElement, wire, track } from 'lwc';
 import getCustomerAppointments from '@salesforce/apex/DashboardController.getCustomerAppointments';
 import getStylistAppointments from '@salesforce/apex/DashboardController.getStylistAppointments';
 import getCustomerPastAppointments from '@salesforce/apex/DashboardController.getCustomerPastAppointments';
@@ -9,8 +9,6 @@ import cancelAppointment from '@salesforce/apex/BookingController.cancelAppointm
 const SESSION_KEY = 'stressless_user_session';
 
 export default class Dashboard extends LightningElement {
-    @api googleClientId;
-
     @track userSession = null;
     @track upcomingAppointments = [];
     @track pastAppointments = [];

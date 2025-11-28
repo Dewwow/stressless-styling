@@ -16,11 +16,9 @@
           },
           "children" : [ {
             "children" : [ {
-              "attributes" : {
-                "dxpStyle" : { }
-              },
+              "attributes" : { },
               "definition" : "c:dashboard",
-              "id" : "5fd9fd97-9500-4b43-b173-7a19e19b0f76",
+              "id" : "d318669b-b064-4901-9075-c91c968efc40",
               "type" : "component"
             } ],
             "id" : "2514881f-27bf-440a-9c26-f2bff914b12c",

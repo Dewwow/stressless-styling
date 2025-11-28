@@ -4,6 +4,12 @@
     <hasActivationRequired>false</hasActivationRequired>
     <label>Stressless Guest</label>
 
+    <!-- Custom Setting Access -->
+    <customSettingAccesses>
+        <enabled>true</enabled>
+        <name>Google_Auth_Settings__c</name>
+    </customSettingAccesses>
+
     <!-- Apex Class Access -->
     <classAccesses>
         <apexClass>BookingController</apexClass>
@@ -22,6 +28,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Appointment__c.Booked_Online__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Google_Auth_Settings__c.Client_ID__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

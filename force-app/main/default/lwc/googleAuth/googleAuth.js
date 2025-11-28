@@ -1,6 +1,7 @@
 import { LightningElement, api, track } from 'lwc';
-import initializeSession from '@salesforce/apex/GoogleAuthService.initializeSession';
+import initializeSessionWithToken from '@salesforce/apex/GoogleAuthService.initializeSessionWithToken';
 import getSession from '@salesforce/apex/GoogleAuthService.getSession';
+import getGoogleClientId from '@salesforce/apex/GoogleAuthService.getGoogleClientId';
 
 const SESSION_KEY = 'stressless_user_session';
 const USE_LOCAL_STORAGE = true; // Use localStorage for persistence across refreshes
@@ -14,7 +15,7 @@ function getStorage() {
 }
 
 export default class GoogleAuth extends LightningElement {
-    @api googleClientId;
+    @api googleClientId; // Fallback - can still be passed as property
 
     @track isLoading = true;
     @track isSignedIn = false;
@@ -24,9 +25,39 @@ export default class GoogleAuth extends LightningElement {
 
     _googleInitialized = false;
     _userSession = null;
+    _clientIdFromSetting = null;
+
+    // Computed property to get the effective client ID
+    get effectiveClientId() {
+        // Property takes precedence, then Custom Setting
+        return this.googleClientId || this._clientIdFromSetting;
+    }
 
     connectedCallback() {
+        this.initialize();
+    }
+
+    /**
+     * Initialize component - load client ID first, then check session
+     */
+    async initialize() {
+        await this.loadClientId();
         this.checkExistingSession();
+    }
+
+    /**
+     * Load Google Client ID from Custom Setting
+     */
+    async loadClientId() {
+        try {
+            const clientId = await getGoogleClientId();
+            if (clientId) {
+                console.log('GoogleAuth: Got client ID from Custom Setting');
+                this._clientIdFromSetting = clientId;
+            }
+        } catch (err) {
+            console.error('GoogleAuth: Error fetching client ID from setting:', err);
+        }
     }
 
     renderedCallback() {
@@ -126,9 +157,9 @@ export default class GoogleAuth extends LightningElement {
     initializeGoogleSignIn() {
         if (this._googleInitialized) return;
 
-        if (!this.googleClientId) {
+        if (!this.effectiveClientId) {
             console.warn('GoogleAuth: Client ID not configured');
-            this.error = 'Google Client ID not configured';
+            this.error = 'Google Client ID not configured. Set it in Custom Settings.';
             return;
         }
 
@@ -140,9 +171,9 @@ export default class GoogleAuth extends LightningElement {
         }
 
         try {
-            console.log('GoogleAuth: Initializing with client ID:', this.googleClientId.substring(0, 20) + '...');
+            console.log('GoogleAuth: Initializing with client ID:', this.effectiveClientId.substring(0, 20) + '...');
             window.google.accounts.id.initialize({
-                client_id: this.googleClientId,
+                client_id: this.effectiveClientId,
                 callback: this.handleCredentialResponse.bind(this),
                 auto_select: false,
                 cancel_on_tap_outside: true
@@ -182,6 +213,7 @@ export default class GoogleAuth extends LightningElement {
 
     /**
      * Handle Google credential response
+     * Sends the raw JWT to server for validation - prevents token forgery
      */
     async handleCredentialResponse(response) {
         console.log('GoogleAuth: handleCredentialResponse called');
@@ -189,27 +221,21 @@ export default class GoogleAuth extends LightningElement {
         this.error = '';
 
         try {
-            // Decode the JWT to get user info
-            const payload = this.decodeJwt(response.credential);
-            console.log('GoogleAuth: JWT decoded, email:', payload.email);
+            const idToken = response.credential;
 
-            const email = payload.email;
-            const firstName = payload.given_name || '';
-            const lastName = payload.family_name || '';
+            // Decode JWT locally just to get picture (not for auth - that's done server-side)
+            const payload = this.decodeJwt(idToken);
             const picture = payload.picture || '';
 
-            // Initialize session with Salesforce
-            console.log('GoogleAuth: Calling initializeSession...');
-            const session = await initializeSession({
-                email: email,
-                firstName: firstName,
-                lastName: lastName
-            });
-            console.log('GoogleAuth: Session initialized:', session);
+            // Send raw token to server for validation
+            // Server will validate with Google and extract user info securely
+            console.log('GoogleAuth: Sending token to server for validation...');
+            const session = await initializeSessionWithToken({ idToken: idToken });
+            console.log('GoogleAuth: Session initialized (token validated):', session);
 
             // Store session in localStorage
             const sessionData = {
-                email: email,
+                email: session.email,
                 firstName: session.firstName,
                 lastName: session.lastName,
                 contactId: session.contactId,

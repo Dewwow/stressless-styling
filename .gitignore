@@ -54,3 +54,7 @@ $RECYCLE.BIN/
 .idea
 .project
 .settings
+
+# Scripts with sensitive data (use set_google_client_id.apex as template)
+scripts/*_now.apex
+scripts/*_secret*.apex

@@ -8,9 +8,4 @@
         <target>lightningCommunity__Page</target>
         <target>lightningCommunity__Default</target>
     </targets>
-    <targetConfigs>
-        <targetConfig targets="lightningCommunity__Default">
-            <property name="googleClientId" type="String" label="Google Client ID" description="OAuth 2.0 Client ID from Google Cloud Console" required="true"/>
-        </targetConfig>
-    </targetConfigs>
 </LightningComponentBundle>

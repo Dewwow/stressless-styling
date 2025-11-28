@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <description>Stores Google OAuth configuration. Set the org-wide default value after creating scratch org.</description>
+    <enableFeeds>false</enableFeeds>
+    <label>Google Auth Settings</label>
+    <visibility>Public</visibility>
+</CustomObject>
