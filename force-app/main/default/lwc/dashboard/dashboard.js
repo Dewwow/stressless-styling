@@ -17,6 +17,8 @@ export default class Dashboard extends LightningElement {
     @track stylists = [];
     @track isLoading = true;
     @track error;
+    @track showAppointmentDetail = false;
+    @track selectedAppointment = null;
 
     // Computed properties
     get isSignedIn() {
@@ -64,7 +66,8 @@ export default class Dashboard extends LightningElement {
      */
     checkStoredSession() {
         try {
-            const storedSession = sessionStorage.getItem(SESSION_KEY);
+            // Check localStorage (matches googleAuth component)
+            const storedSession = localStorage.getItem(SESSION_KEY);
             if (storedSession) {
                 this.userSession = JSON.parse(storedSession);
                 this.loadAppointments();
@@ -219,6 +222,29 @@ export default class Dashboard extends LightningElement {
     handleViewSchedule() {
         // Navigate to full schedule view
         console.log('View schedule clicked');
+    }
+
+    handleViewAppointment(event) {
+        const appointmentId = event.currentTarget.dataset.id;
+        // Find the appointment in upcoming or past lists
+        let apt = this.upcomingAppointments.find(a => a.appointmentId === appointmentId);
+        if (!apt) {
+            apt = this.pastAppointments.find(a => a.appointmentId === appointmentId);
+        }
+        if (apt) {
+            // Add clickable links for email and phone
+            this.selectedAppointment = {
+                ...apt,
+                emailLink: apt.customerEmail ? `mailto:${apt.customerEmail}` : null,
+                phoneLink: apt.customerPhone ? `tel:${apt.customerPhone}` : null
+            };
+            this.showAppointmentDetail = true;
+        }
+    }
+
+    handleCloseDetail() {
+        this.showAppointmentDetail = false;
+        this.selectedAppointment = null;
     }
 
     async handleCancelAppointment(event) {

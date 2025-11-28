@@ -10,7 +10,7 @@ public without sharing class DashboardController {
      * @param contactId The Contact Id to get appointments for
      * @return List of AppointmentWrapper objects
      */
-    @AuraEnabled(cacheable=true)
+    @AuraEnabled
     public static List<AppointmentWrapper> getCustomerAppointments(Id contactId) {
         List<AppointmentWrapper> appointments = new List<AppointmentWrapper>();
 
@@ -40,7 +40,7 @@ public without sharing class DashboardController {
      * @param stylistId The Stylist Id to get appointments for
      * @return List of AppointmentWrapper objects
      */
-    @AuraEnabled(cacheable=true)
+    @AuraEnabled
     public static List<AppointmentWrapper> getStylistAppointments(Id stylistId) {
         List<AppointmentWrapper> appointments = new List<AppointmentWrapper>();
 
@@ -70,7 +70,7 @@ public without sharing class DashboardController {
      * @param contactId The Contact Id to get appointments for
      * @return List of AppointmentWrapper objects
      */
-    @AuraEnabled(cacheable=true)
+    @AuraEnabled
     public static List<AppointmentWrapper> getCustomerPastAppointments(Id contactId) {
         List<AppointmentWrapper> appointments = new List<AppointmentWrapper>();
 
@@ -99,7 +99,7 @@ public without sharing class DashboardController {
      * @param stylistId The Stylist Id to get appointments for
      * @return List of AppointmentWrapper objects
      */
-    @AuraEnabled(cacheable=true)
+    @AuraEnabled
     public static List<AppointmentWrapper> getStylistPastAppointments(Id stylistId) {
         List<AppointmentWrapper> appointments = new List<AppointmentWrapper>();
 

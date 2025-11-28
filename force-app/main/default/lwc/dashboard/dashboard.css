@@ -78,3 +78,20 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+/* Clickable appointment items */
+.clickable-item {
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+    border-radius: 4px;
+    padding: 0.75rem;
+    margin: -0.5rem;
+}
+
+.clickable-item:hover {
+    background-color: #f3f3f3;
+}
+
+.clickable-item:active {
+    background-color: #e5e5e5;
+}

@@ -241,6 +241,86 @@
                 </c-booking-modal>
             </template>
 
+            <!-- Appointment Detail Modal -->
+            <template if:true={showAppointmentDetail}>
+                <section role="dialog" tabindex="-1" aria-modal="true" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <header class="slds-modal__header">
+                            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick={handleCloseDetail}>
+                                <lightning-icon icon-name="utility:close" size="small" variant="inverse"></lightning-icon>
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                            <h2 class="slds-modal__title slds-hyphenate">Appointment Details</h2>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium">
+                            <!-- Date and Time -->
+                            <div class="slds-grid slds-wrap slds-m-bottom_medium">
+                                <div class="slds-col slds-size_1-of-2">
+                                    <p class="slds-text-title_caps slds-m-bottom_xx-small">Date & Time</p>
+                                    <p class="slds-text-heading_small">{selectedAppointment.formattedDateTime}</p>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2 slds-text-align_right">
+                                    <span class={selectedAppointment.statusClass}>{selectedAppointment.status}</span>
+                                </div>
+                            </div>
+
+                            <!-- Customer Info -->
+                            <div class="slds-box slds-box_x-small slds-m-bottom_medium slds-theme_shade">
+                                <p class="slds-text-title_caps slds-m-bottom_x-small">Customer</p>
+                                <p class="slds-text-heading_small">{selectedAppointment.customerName}</p>
+                                <template if:true={selectedAppointment.customerEmail}>
+                                    <p class="slds-text-body_regular slds-m-top_xx-small">
+                                        <lightning-icon icon-name="utility:email" size="xx-small" class="slds-m-right_xx-small"></lightning-icon>
+                                        <a href={selectedAppointment.emailLink}>{selectedAppointment.customerEmail}</a>
+                                    </p>
+                                </template>
+                                <template if:true={selectedAppointment.customerPhone}>
+                                    <p class="slds-text-body_regular slds-m-top_xx-small">
+                                        <lightning-icon icon-name="utility:call" size="xx-small" class="slds-m-right_xx-small"></lightning-icon>
+                                        <a href={selectedAppointment.phoneLink}>{selectedAppointment.customerPhone}</a>
+                                    </p>
+                                </template>
+                            </div>
+
+                            <!-- Services -->
+                            <div class="slds-m-bottom_medium">
+                                <p class="slds-text-title_caps slds-m-bottom_x-small">Services</p>
+                                <ul class="slds-list_dotted">
+                                    <template for:each={selectedAppointment.services} for:item="svc">
+                                        <li key={svc.serviceName} class="slds-p-vertical_xx-small">
+                                            <span class="slds-text-body_regular">{svc.serviceName}</span>
+                                            <span class="slds-text-body_small slds-text-color_weak slds-m-left_x-small">
+                                                ({svc.duration} min - ${svc.price})
+                                            </span>
+                                        </li>
+                                    </template>
+                                </ul>
+                                <div class="slds-grid slds-m-top_small">
+                                    <div class="slds-col">
+                                        <strong>Total:</strong> {selectedAppointment.formattedPrice}
+                                    </div>
+                                    <div class="slds-col slds-text-align_right">
+                                        <strong>Duration:</strong> {selectedAppointment.formattedDuration}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Notes -->
+                            <template if:true={selectedAppointment.notes}>
+                                <div class="slds-m-bottom_medium">
+                                    <p class="slds-text-title_caps slds-m-bottom_x-small">Notes</p>
+                                    <p class="slds-text-body_regular slds-box slds-box_x-small">{selectedAppointment.notes}</p>
+                                </div>
+                            </template>
+                        </div>
+                        <footer class="slds-modal__footer">
+                            <button class="slds-button slds-button_neutral" onclick={handleCloseDetail}>Close</button>
+                        </footer>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open" onclick={handleCloseDetail}></div>
+            </template>
+
             <!-- STYLIST VIEW -->
             <template if:true={isStylist}>
                 <!-- Today's Schedule -->
@@ -266,28 +346,20 @@
                         <template if:true={hasUpcomingAppointments}>
                             <ul class="slds-has-dividers_bottom-space">
                                 <template for:each={upcomingAppointments} for:item="apt">
-                                    <li key={apt.appointmentId} class="slds-item slds-p-vertical_small">
+                                    <li key={apt.appointmentId} class="slds-item slds-p-vertical_small clickable-item"
+                                        data-id={apt.appointmentId}
+                                        onclick={handleViewAppointment}>
                                         <div class="slds-grid slds-wrap">
                                             <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
                                                 <p class="slds-text-heading_small">{apt.formattedDateTime}</p>
                                                 <p class="slds-text-body_regular slds-text-title_bold">{apt.customerName}</p>
                                                 <p class="slds-text-body_small">{apt.serviceNames}</p>
-                                                <template if:true={apt.notes}>
-                                                    <p class="slds-text-body_small slds-text-color_weak slds-m-top_xx-small">
-                                                        Note: {apt.notes}
-                                                    </p>
-                                                </template>
                                             </div>
                                             <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-text-align_right">
                                                 <span class={apt.statusClass}>{apt.status}</span>
                                                 <p class="slds-text-body_small slds-m-top_xx-small">
                                                     {apt.formattedDuration}
                                                 </p>
-                                                <template if:true={apt.customerPhone}>
-                                                    <p class="slds-text-body_small slds-text-color_weak">
-                                                        {apt.customerPhone}
-                                                    </p>
-                                                </template>
                                             </div>
                                         </div>
                                     </li>
@@ -322,7 +394,9 @@
                         <div class="slds-card__body slds-card__body_inner">
                             <ul class="slds-has-dividers_bottom-space">
                                 <template for:each={pastAppointments} for:item="apt">
-                                    <li key={apt.appointmentId} class="slds-item slds-p-vertical_x-small">
+                                    <li key={apt.appointmentId} class="slds-item slds-p-vertical_x-small clickable-item"
+                                        data-id={apt.appointmentId}
+                                        onclick={handleViewAppointment}>
                                         <div class="slds-grid">
                                             <div class="slds-col">
                                                 <p class="slds-text-body_regular">{apt.customerName}</p>
