@@ -88,6 +88,8 @@ public without sharing class GoogleAuthService {
 
         try {
             HttpResponse response = http.send(request);
+            System.debug('Google token validation response status: ' + response.getStatusCode());
+            System.debug('Google token validation response body: ' + response.getBody());
             if (response.getStatusCode() == 200) {
                 return (GoogleTokenInfo) JSON.deserialize(response.getBody(), GoogleTokenInfo.class);
             } else {
@@ -96,7 +98,7 @@ public without sharing class GoogleAuthService {
             }
         } catch (Exception e) {
             System.debug('Error validating Google token: ' + e.getMessage());
-            return null;
+            throw new AuraHandledException('Token validation error: ' + e.getMessage());
         }
     }
 
@@ -108,7 +110,7 @@ public without sharing class GoogleAuthService {
         public String aud;          // Audience (client ID)
         public String sub;          // Subject (unique Google user ID)
         public String email;
-        public Boolean email_verified;
+        public String email_verified; // Google returns this as string "true"/"false"
         public String given_name;
         public String family_name;
         public String picture;
